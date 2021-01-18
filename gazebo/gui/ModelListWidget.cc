@@ -127,23 +127,23 @@ ModelListWidget::ModelListWidget(QWidget *_parent)
 
   this->connections.push_back(
       gui::Events::ConnectModelUpdate(
-        boost::bind(&ModelListWidget::OnModelUpdate, this, _1)));
+        boost::bind(&ModelListWidget::OnModelUpdate, this, boost::arg<1>())));
 
   this->connections.push_back(
       gui::Events::ConnectLightUpdate(
-        boost::bind(&ModelListWidget::OnLightUpdate, this, _1)));
+        boost::bind(&ModelListWidget::OnLightUpdate, this, boost::arg<1>())));
 
   this->connections.push_back(
       rendering::Events::ConnectCreateScene(
-        boost::bind(&ModelListWidget::OnCreateScene, this, _1)));
+        boost::bind(&ModelListWidget::OnCreateScene, this, boost::arg<1>())));
 
   this->connections.push_back(
       rendering::Events::ConnectRemoveScene(
-        boost::bind(&ModelListWidget::OnRemoveScene, this, _1)));
+        boost::bind(&ModelListWidget::OnRemoveScene, this, boost::arg<1>())));
 
   this->connections.push_back(
       event::Events::ConnectSetSelectedEntity(
-        boost::bind(&ModelListWidget::OnSetSelectedEntity, this, _1, _2)));
+        boost::bind(&ModelListWidget::OnSetSelectedEntity, this, boost::arg<1>(), boost::arg<2>())));
 
   QTimer::singleShot(500, this, SLOT(Update()));
 }
